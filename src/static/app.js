@@ -108,11 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (response.ok) {
+        signupForm.reset();
+        await fetchActivities(); // Ensure UI is updated before showing message
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
-        signupForm.reset();
-        // Wait for activities to refresh before showing message
-        await fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
